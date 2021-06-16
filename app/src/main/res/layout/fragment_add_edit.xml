@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/tv_add_title"
+        android:background="null"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|start"
+        android:layout_margin="@dimen/margin_16"
+        android:hint="@string/title"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/tv_note_date"
+        android:textStyle="italic"
+        android:textSize="8sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/margin_16"
+        android:text="@string/date_placeholder"
+        app:layout_anchor="@id/tv_add_title"
+        app:layout_anchorGravity="bottom"
+        tools:ignore="SmallSp" />
+
+    <EditText
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/tv_add_note"
+        android:layout_width="wrap_content"
+        android:background="@drawable/custom_note_style"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+
+        android:layout_marginTop="@dimen/margin_32"
+        android:layout_marginStart="@dimen/margin_32"
+        android:hint="@string/note"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_anchor="@id/tv_note_date"
+        app:layout_anchorGravity="bottom" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
