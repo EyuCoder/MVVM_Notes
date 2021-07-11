@@ -2,8 +2,15 @@
     <string name="app_name">Notes</string>
     <string name="add_new_note">add new note</string>
     <string name="lorem_ipsum">What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
-    <string name="date_placeholder">Date: 02-08-2022</string>
+    <string name="date_placeholder">Date: 02–08–2022</string>
     <string name="favorite_notes">Favorite</string>
     <string name="title">Title</string>
     <string name="note">Note</string>
+    <string name="search">Search</string>
+    <string name="sort">Sort</string>
+    <string name="date_created">Date created</string>
+    <string name="date_modified">Date modified</string>
+    <string name="delete_all_notes">Delete all notes</string>
+    <string name="pin_favorites">Pin favorites</string>
+    <string name="show_archived">Show archived</string>
 </resources>
