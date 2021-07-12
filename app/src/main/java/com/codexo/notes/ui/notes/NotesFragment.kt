@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codexo.notes.R
+import com.codexo.notes.adapters.NotesAdapter
 import com.codexo.notes.databinding.FragmentNotesBinding
 import kotlinx.android.synthetic.main.fragment_notes.*
 

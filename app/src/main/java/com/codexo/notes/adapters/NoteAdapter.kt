@@ -1,4 +1,4 @@
-package com.codexo.notes.ui.notes
+package com.codexo.notes.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
