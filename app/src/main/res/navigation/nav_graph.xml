@@ -8,6 +8,29 @@
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.codexo.notes.ui.notes.NotesFragment"
-        android:label="fragment_notes"
-        tools:layout="@layout/fragment_notes" />
+        android:label="fragment notes"
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.codexo.notes.ui.add.AddFragment"
+        android:label="Add Fragment">
+        <action
+            android:id="@+id/action_addFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.codexo.notes.ui.edit.EditFragment"
+        android:label="Edit Fragment" >
+        <action
+            android:id="@+id/action_editFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
+    </fragment>
 </navigation>

@@ -8,9 +8,11 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codexo.notes.R
 import com.codexo.notes.databinding.FragmentNotesBinding
+import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
@@ -36,6 +38,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         viewModel.allNotes.observe(viewLifecycleOwner) {
             notesAdapter.submitList(it)
         }
+
+        fab_add.setOnClickListener { findNavController().navigate(R.id.action_notesFragment_to_addFragment) }
+
         setHasOptionsMenu(true)
     }
 
