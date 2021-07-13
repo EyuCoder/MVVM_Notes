@@ -37,10 +37,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         }
 
         viewModel.allNotes.observe(viewLifecycleOwner) {
-            notesAdapter.submitList(it)
+            notesAdapter.setData(it)
         }
-
-        fab_add.setOnClickListener { findNavController().navigate(R.id.action_notesFragment_to_addFragment) }
 
         setHasOptionsMenu(true)
     }
@@ -86,8 +84,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         val searchQuery = "%${query}%"
         viewModel.searchNote(searchQuery).observe(this, { list ->
             list?.let {
-                notesAdapter.submitList(it)
+                notesAdapter.setData(it)
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

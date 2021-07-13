@@ -23,7 +23,9 @@
         android:label="Add Fragment">
         <action
             android:id="@+id/action_addFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -31,6 +33,11 @@
         android:label="Edit Fragment" >
         <action
             android:id="@+id/action_editFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="currentItem"
+            app:argType="com.codexo.notes.data.Note" />
     </fragment>
 </navigation>

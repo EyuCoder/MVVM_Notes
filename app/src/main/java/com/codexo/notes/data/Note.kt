@@ -21,7 +21,7 @@ data class Note(
     @ColumnInfo(name = "favorite")
     val favorite: Boolean = false,
     @ColumnInfo(name = "last_updated_at")
-    var lastUpdatedAt: Long?,
+    var lastUpdatedAt: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "archived")
     val archived: Boolean = false,
 

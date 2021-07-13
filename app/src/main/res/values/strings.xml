@@ -7,10 +7,12 @@
     <string name="title">Title</string>
     <string name="note">Note</string>
     <string name="search">Search</string>
-    <string name="sort">Sort</string>
+    <string name="sort">Sort by</string>
     <string name="date_created">Date created</string>
     <string name="date_modified">Date modified</string>
     <string name="delete_all_notes">Delete all notes</string>
     <string name="pin_favorites">Pin favorites</string>
     <string name="show_archived">Show archived</string>
+    <string name="save">save</string>
+    <string name="delete">delete</string>
 </resources>

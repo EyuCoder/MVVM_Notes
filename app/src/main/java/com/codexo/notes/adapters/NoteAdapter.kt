@@ -9,35 +9,44 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.ItemNotesBinding
 
-class NotesAdapter : ListAdapter<Note, NotesAdapter.NotesViewHolder>(DiffCallback()) {
+class NotesAdapter : RecyclerView.Adapter<NotesAdapter.TodoViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
-        val binding = ItemNotesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NotesViewHolder(binding)
-    }
+    var todoList = emptyList<Note>()
 
-    override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        val currentItem = getItem(position)
-        holder.bind(currentItem)
-    }
-
-    class NotesViewHolder(private val binding: ItemNotesBinding) :
+    class TodoViewHolder(private val binding: ItemNotesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(note: Note) {
-            binding.apply {
-                tvTitle.text = note.title
-                tvNotes.text = note.note
-                ivFavorite.isVisible = note.favorite
+            binding.note = note
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): TodoViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemNotesBinding.inflate(layoutInflater, parent, false)
+                return TodoViewHolder(binding)
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Note>() {
-        override fun areItemsTheSame(oldItem: Note, newItem: Note) =
-            oldItem.id == newItem.id
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
+        return TodoViewHolder.from(parent)
+    }
 
-        override fun areContentsTheSame(oldItem: Note, newItem: Note) =
-            oldItem == newItem
+    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
+        val currentItem = todoList[position]
+        holder.bind(currentItem)
+    }
+
+    override fun getItemCount(): Int {
+        return todoList.size
+    }
+
+    fun setData(notesData: List<Note>) {
+        val notesDiffUtil = DiffUtil(todoList, notesData)
+        val notesDiffResult = DiffUtil.calculateDiff(notesDiffUtil)
+
+        this.todoList = notesData
+        notesDiffResult.dispatchUpdatesTo(this)
     }
 }

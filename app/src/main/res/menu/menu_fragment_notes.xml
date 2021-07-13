@@ -10,6 +10,8 @@
         app:showAsAction="always|collapseActionView" />
 
     <item
+
+        android:checkable="true"
         android:icon="@drawable/ic_sort"
         android:title="@string/sort"
         app:showAsAction="ifRoom">
@@ -17,12 +19,15 @@
         <menu>
             <item
                 android:id="@+id/action_sort_by_title"
+                android:checkable="true"
                 android:title="@string/title" />
             <item
                 android:id="@+id/action_sort_by_date_created"
+                android:checkable="true"
                 android:title="@string/date_created" />
             <item
                 android:id="@+id/action_sort_by_date_modified"
+                android:checkable="true"
                 android:title="@string/date_modified" />
         </menu>
     </item>
