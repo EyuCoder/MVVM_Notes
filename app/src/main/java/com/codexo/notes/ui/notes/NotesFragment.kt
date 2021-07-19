@@ -64,14 +64,15 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_sort_by_title -> true
-            R.id.action_sort_by_date_created -> true
-            R.id.action_sort_by_date_modified -> true
-            R.id.action_pin_favorites -> {
+            R.id.action_sort_by_title -> {
                 item.isChecked = !item.isChecked
                 true
             }
-            R.id.action_show_archived -> {
+            R.id.action_sort_by_date_created -> {
+                item.isChecked = !item.isChecked
+                true
+            }
+            R.id.action_sort_by_date_modified -> {
                 item.isChecked = !item.isChecked
                 true
             }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.codexo.notes.ui.notes.NotesFragment"
-        android:label="fragment notes"
+        android:label="Notes"
         tools:layout="@layout/fragment_notes" >
         <action
             android:id="@+id/action_notesFragment_to_addFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="com.codexo.notes.ui.add.AddFragment"
-        android:label="Add Fragment">
+        android:label="New note">
         <action
             android:id="@+id/action_addFragment_to_notesFragment"
             app:destination="@id/notesFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/editFragment"
         android:name="com.codexo.notes.ui.edit.EditFragment"
-        android:label="Edit Fragment" >
+        android:label="" >
         <action
             android:id="@+id/action_editFragment_to_notesFragment"
             app:destination="@id/notesFragment"

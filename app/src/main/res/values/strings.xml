@@ -15,4 +15,11 @@
     <string name="show_archived">Show archived</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
+    <string name="about">About</string>
+
+    <string-array name="sortBy">
+        <item>Title</item>
+        <item>Date created</item>
+        <item>Date modified</item>
+    </string-array>
 </resources>

@@ -10,7 +10,6 @@
         app:showAsAction="always|collapseActionView" />
 
     <item
-
         android:checkable="true"
         android:icon="@drawable/ic_sort"
         android:title="@string/sort"
@@ -32,15 +31,19 @@
         </menu>
     </item>
 
+    <!--    <item-->
+    <!--        android:id="@+id/action_pin_favorites"-->
+    <!--        android:checkable="true"-->
+    <!--        android:title="@string/pin_favorites"-->
+    <!--        app:showAsAction="never" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/action_show_archived"-->
+    <!--        android:checkable="true"-->
+    <!--        android:title="@string/show_archived"-->
+    <!--        app:showAsAction="never" />-->
     <item
-        android:id="@+id/action_pin_favorites"
-        android:checkable="true"
-        android:title="@string/pin_favorites"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_show_archived"
-        android:checkable="true"
-        android:title="@string/show_archived"
+        android:id="@+id/action_about"
+        android:title="@string/about"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_delete_all_notes"
