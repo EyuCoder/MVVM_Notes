@@ -13,10 +13,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_8"
-        android:layout_marginTop="@dimen/margin_8"
+        android:layout_margin="@dimen/margin_4"
         android:elevation="2dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,46 +25,37 @@
             <TextView
                 android:id="@+id/tv_title"
                 style="@style/TitleStyle"
-                android:fontFamily="casual"
                 android:text="@{Note.title}"
+                app:layout_constraintEnd_toEndOf="@+id/iv_favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/title" />
 
             <ImageView
                 android:id="@+id/iv_favorite"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_margin="@dimen/margin_16"
-                android:contentDescription="@string/favorite_notes"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/selector_favorite"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_title" />
+                app:layout_constraintTop_toTopOf="@+id/tv_title"
+                style="@style/FavoriteStyle" />
 
             <TextView
                 android:id="@+id/tv_notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_16"
-                android:ellipsize="end"
-                android:maxLines="4"
                 android:text="@{Note.note}"
                 tools:text="@string/lorem_ipsum"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                style="@style/NoteStyle" />
 
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_16"
+                style="@style/DateTimeStyle"
                 android:text="@{Note.lastUpdatedAtFormatted}"
-                tools:text="@string/date_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_notes" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_notes"
+                tools:text="@string/date_placeholder" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

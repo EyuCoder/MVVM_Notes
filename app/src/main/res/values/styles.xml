@@ -1,23 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="TitleStyle" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="TitleStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/margin_16</item>
-        <item name="android:maxWidth">200dp</item>
+        <item name="android:layout_margin">@dimen/margin_14</item>
         <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/large_regular_text</item>
+        <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 
-    <style name="NoteStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+    <style name="NoteStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/margin_14</item>
+        <item name="android:layout_marginEnd">@dimen/margin_14</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">6</item>
+        <item name="android:textSize">@dimen/medium_regular_text</item>
+
+    </style>
+
+    <style name="DateTimeStyle">
+        <item name="android:textSize">@dimen/small_italic_text</item>
+        <item name="android:fontFamily">@font/roboto_light_italic</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/margin_16</item>
-        <item name="android:text">jdsfksdjfksd</item>
-        <item name="icon">@drawable/ic_delete</item>
-        <item name="iconGravity">textStart</item>
+        <item name="android:layout_margin">@dimen/margin_14</item>
+    </style>
 
+    <style name="FavoriteStyle">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_margin">@dimen/margin_14</item>
+        <item name="android:contentDescription">@string/favorite_notes</item>
+    </style>
+
+    <style name="DetailStyle" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_14</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">text</item>
     </style>
 
 </resources>

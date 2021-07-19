@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codexo.notes.R
 import com.codexo.notes.adapters.NotesAdapter
 import com.codexo.notes.databinding.FragmentNotesBinding
@@ -31,7 +32,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         binding?.apply {
             rvNotes.apply {
                 adapter = notesAdapter
-                layoutManager = LinearLayoutManager(requireContext())
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 setHasFixedSize(true)
             }
         }

@@ -9,24 +9,21 @@
 
         <EditText
             android:id="@+id/et_add_title"
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_16"
-            android:background="@android:color/transparent"
+            style="@style/DetailStyle"
             android:hint="@string/title"
             android:text=""
-            android:importantForAutofill="no"
-            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:importantForAutofill="no" />
 
         <TextView
+            style="@style/DateTimeStyle"
             android:id="@+id/tv_note_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
             android:text="@string/date_placeholder"
             android:textSize="14dp"
             android:textStyle="italic"
@@ -36,8 +33,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_32"
-            android:layout_marginTop="@dimen/margin_16"
+            android:layout_margin="@dimen/margin_14"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +46,9 @@
                 android:background="@drawable/custom_note_style" />
 
             <EditText
+                style="@style/NoteStyle"
+                android:layout_margin="0dp"
+                android:textSize="@dimen/large_regular_text"
                 android:id="@+id/et_add_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,8 +58,8 @@
                 android:hint="@string/note"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
-                android:paddingStart="@dimen/margin_16"
-                android:paddingEnd="@dimen/margin_16" />
+                android:paddingStart="@dimen/margin_14"
+                android:paddingEnd="@dimen/margin_14" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

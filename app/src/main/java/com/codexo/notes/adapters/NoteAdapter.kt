@@ -2,9 +2,7 @@ package com.codexo.notes.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.ItemNotesBinding
