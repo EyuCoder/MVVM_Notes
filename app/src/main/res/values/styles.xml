@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TitleStyle" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_16</item>
+        <item name="android:maxWidth">200dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="NoteStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_16</item>
+        <item name="android:text">jdsfksdjfksd</item>
+        <item name="icon">@drawable/ic_delete</item>
+        <item name="iconGravity">textStart</item>
+
+    </style>
+
+</resources>

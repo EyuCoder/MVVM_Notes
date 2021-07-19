@@ -76,6 +76,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                 item.isChecked = !item.isChecked
                 true
             }
+            R.id.action_about -> {
+                findNavController().navigate(R.id.action_notesFragment_to_aboutFragment)
+                true
+            }
             R.id.action_delete_all_notes -> true
             else -> super.onOptionsItemSelected(item)
         }

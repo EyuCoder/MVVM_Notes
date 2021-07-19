@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_notesFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -39,5 +42,14 @@
         <argument
             android:name="currentItem"
             app:argType="com.codexo.notes.data.Note" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.codexo.notes.ui.AboutFragment"
+        android:label="About Me"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
     </fragment>
 </navigation>
