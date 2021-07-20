@@ -64,26 +64,30 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        when (item.itemId) {
             R.id.action_sort_by_title -> {
-                item.isChecked = !item.isChecked
-                true
+                viewModel.sortBy(sortBy[0]).observe(this, { notesAdapter.setData(it) })
             }
             R.id.action_sort_by_date_created -> {
-                item.isChecked = !item.isChecked
-                true
+                viewModel.sortBy("created_at").observe(this, { notesAdapter.setData(it) })
             }
             R.id.action_sort_by_date_modified -> {
-                item.isChecked = !item.isChecked
-                true
+                viewModel.sortBy(sortBy[2]).observe(this, { notesAdapter.setData(it) })
             }
             R.id.action_about -> {
                 findNavController().navigate(R.id.action_notesFragment_to_aboutFragment)
-                true
             }
-            R.id.action_delete_all_notes -> true
-            else -> super.onOptionsItemSelected(item)
+            R.id.action_delete_all_notes -> {
+                deleteAllDialog()
+                viewModel.deleteAllNotes()
+            }
+            else -> true
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllDialog() {
+        TODO("Not yet implemented")
     }
 
     private fun searchNote(query: String) {
@@ -98,5 +102,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        val sortBy = listOf("title", "created_at", "last_updated_at", "favorite")
     }
 }
