@@ -7,9 +7,4 @@
         android:icon="@drawable/ic_save"
         android:title="@string/save"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/menu_favorite"
-        android:icon="@drawable/selector_favorite"
-        android:title="@string/add_to_favorites"
-        app:showAsAction="never" />
 </menu>

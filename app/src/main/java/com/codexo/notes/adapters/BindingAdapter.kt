@@ -1,6 +1,7 @@
 package com.codexo.notes.adapters
 
 import android.view.View
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +27,14 @@ class BindingAdapter {
         @JvmStatic
         fun emptyDb(view: View, emptyDb: MutableLiveData<Boolean>) {
             view.visibility = if (emptyDb.value == true) View.VISIBLE else View.INVISIBLE
+        }
+
+        @BindingAdapter("android:marked_favorite")
+        @JvmStatic
+        fun markFavorite(img: ImageView, marked: Boolean) {
+            if (marked) {
+                img.setImageResource(R.drawable.ic_favorite_on)
+            } else img.setImageResource(R.drawable.ic_favorite_off)
         }
 
         @BindingAdapter("android:send_notes_to_edit")

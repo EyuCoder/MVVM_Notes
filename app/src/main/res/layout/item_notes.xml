@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="favorite"
+            type="com.codexo.notes.ui.notes.NotesFragment" />
+
+        <variable
             name="Note"
             type="com.codexo.notes.data.Note" />
     </data>
@@ -33,20 +37,22 @@
 
             <ImageView
                 android:id="@+id/iv_favorite"
+                style="@style/FavoriteStyle"
+                android:marked_favorite="@{Note.favorite}"
                 android:src="@drawable/selector_favorite"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_title"
-                style="@style/FavoriteStyle" />
+                android:contentDescription="@string/favorite_notes" />
 
             <TextView
                 android:id="@+id/tv_notes"
+                style="@style/NoteStyle"
                 android:text="@{Note.note}"
-                tools:text="@string/lorem_ipsum"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title"
-                style="@style/NoteStyle" />
+                tools:text="@string/lorem_ipsum" />
 
             <TextView
                 android:id="@+id/tv_date"

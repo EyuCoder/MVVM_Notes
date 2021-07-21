@@ -12,6 +12,7 @@ import com.codexo.notes.R
 import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.FragmentDetailBinding
 import com.codexo.notes.ui.SharedViewModel
+import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 
 class AddFragment : Fragment(R.layout.fragment_detail) {
@@ -52,6 +53,7 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
             snackbar.show()
             findNavController().navigate(R.id.action_addFragment_to_notesFragment)
         }
+        hideKeyboard()
     }
 
     override fun onDestroyView() {

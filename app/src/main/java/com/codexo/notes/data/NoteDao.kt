@@ -30,4 +30,7 @@ interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY favorite DESC")
     fun sortByFavoriteDesc(): LiveData<List<Note>>
 
+    @Query("UPDATE note_table SET favorite = :fave WHERE id = :id")
+    suspend fun markAsFavorite(fave: Boolean, id: Long)
+
 }

@@ -1,5 +1,6 @@
 package com.codexo.notes.ui.notes
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -9,16 +10,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codexo.notes.R
 import com.codexo.notes.adapters.NotesAdapter
+import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.FragmentNotesBinding
-import kotlinx.android.synthetic.main.fragment_notes.*
+import com.codexo.notes.ui.SharedViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private val viewModel: NotesViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
     private var _binding: FragmentNotesBinding? = null
     private val binding
         get() = _binding
@@ -79,7 +82,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             }
             R.id.action_delete_all_notes -> {
                 deleteAllDialog()
-                viewModel.deleteAllNotes()
             }
             else -> true
         }
@@ -87,7 +89,35 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     private fun deleteAllDialog() {
-        TODO("Not yet implemented")
+        if (!viewModel.allNotes.value.isNullOrEmpty()) {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setPositiveButton("Yes") { _, _ ->
+
+                var notes: List<Note> = viewModel.allNotes.value!!
+                viewModel.deleteAllNotes()
+
+                val snackBar = Snackbar.make(
+                    binding!!.fabAdd, "All Notes Deleted!",
+                    Snackbar.LENGTH_LONG
+                )
+                snackBar.setAction("Undo") {
+                    for (note in notes) {
+                        sharedViewModel.insertNote(note)
+                    }
+                }
+                snackBar.show()
+            }
+            builder.setNegativeButton("No") { _, _ -> }
+            builder.setTitle("Delete All notes?")
+            builder.setMessage("Are you sure you want to Remove everything?")
+            builder.create().show()
+        } else {
+            val snackBar = Snackbar.make(
+                binding!!.fabAdd, "No Data to Delete",
+                Snackbar.LENGTH_LONG
+            )
+            snackBar.show()
+        }
     }
 
     private fun searchNote(query: String) {
@@ -106,5 +136,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     companion object {
         val sortBy = listOf("title", "created_at", "last_updated_at", "favorite")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.allNotes.observe(viewLifecycleOwner) { notesAdapter.setData(it) }
     }
 }

@@ -19,7 +19,7 @@ data class Note(
     @ColumnInfo(name = "note")
     val note: String,
     @ColumnInfo(name = "favorite")
-    val favorite: Boolean = false,
+    var favorite: Boolean = false,
     @ColumnInfo(name = "last_updated_at")
     var lastUpdatedAt: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "archived")

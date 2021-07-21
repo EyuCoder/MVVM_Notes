@@ -14,7 +14,9 @@ import com.codexo.notes.R
 import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.FragmentDetailBinding
 import com.codexo.notes.ui.SharedViewModel
+import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
+
 
 class EditFragment : Fragment(R.layout.fragment_detail) {
     private val args: EditFragmentArgs by navArgs()
@@ -37,15 +39,34 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_fragment_edit, menu)
+        val item: MenuItem = menu.findItem(R.id.menu_favorite)
+        if (args.currentItem.favorite) {
+            item.title = "Remove from favorites"
+        } else {
+            item.title = "Add to favorites"
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_update -> updateNote()
             R.id.menu_delete -> deleteNote()
+            R.id.menu_favorite -> {
+                markAsFavorite()
+                if (!args.currentItem.favorite) {
+                    item.title = "Remove from favorites"
+                } else {
+                    item.title = "Add to favorites"
+                }
+            }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun markAsFavorite() {
+        viewModel.markAsFavorite(!args.currentItem.favorite, args.currentItem.id)
+        args.currentItem.favorite = !args.currentItem.favorite
     }
 
     private fun deleteNote() {
@@ -79,6 +100,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
                 id = args.currentItem.id,
                 title = title,
                 note = note,
+                favorite = args.currentItem.favorite,
                 lastUpdatedAt = System.currentTimeMillis()
             )
             viewModel.updateNote(newNote)
@@ -86,6 +108,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
             snackbar.show()
             findNavController().navigate(R.id.action_editFragment_to_notesFragment)
         }
+        hideKeyboard()
     }
 
     override fun onDestroyView() {

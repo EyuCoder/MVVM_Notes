@@ -8,7 +8,6 @@ import com.codexo.notes.data.Note
 import com.codexo.notes.data.NoteDatabase
 import kotlinx.coroutines.launch
 
-
 class NotesViewModel constructor(application: Application) : AndroidViewModel(application) {
     private val noteDao = NoteDatabase.getInstance(application).noteDao()
 

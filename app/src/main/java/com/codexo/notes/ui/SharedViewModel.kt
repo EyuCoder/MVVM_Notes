@@ -17,5 +17,6 @@ class SharedViewModel constructor(application: Application) : AndroidViewModel(a
 
     fun deleteItem(note: Note) = viewModelScope.launch(Dispatchers.IO) { noteDao.delete(note) }
 
-    fun clearAllNotes() = viewModelScope.launch(Dispatchers.IO) { noteDao.clearNotes() }
+    fun markAsFavorite(fave: Boolean, id: Long) =
+        viewModelScope.launch(Dispatchers.IO) { noteDao.markAsFavorite(fave, id) }
 }
