@@ -1,6 +1,6 @@
 package com.codexo.notes.ui.edit
 
-import android.app.AlertDialog
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,6 +15,7 @@ import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.FragmentDetailBinding
 import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -25,6 +26,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
     private val binding
         get() = _binding
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
@@ -32,7 +34,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
         binding?.apply {
             etAddTitle.setText(args.currentItem.title)
             etAddNote.setText(args.currentItem.note)
-            tvNoteDate.text = args.currentItem.lastUpdatedAtFormatted
+            tvNoteDate.text = "last edited at: ${args.currentItem.lastUpdatedAtFormatted}"
         }
         setHasOptionsMenu(true)
     }
@@ -53,7 +55,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
             R.id.menu_delete -> deleteNote()
             R.id.menu_favorite -> {
                 markAsFavorite()
-                if (!args.currentItem.favorite) {
+                if (args.currentItem.favorite) {
                     item.title = "Remove from favorites"
                 } else {
                     item.title = "Add to favorites"
@@ -72,7 +74,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
     private fun deleteNote() {
         val title = binding?.etAddTitle?.text.toString()
 
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = MaterialAlertDialogBuilder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             viewModel.deleteItem(args.currentItem)
             val snackbar = Snackbar.make(requireView(), "'$title' deleted!", Snackbar.LENGTH_LONG)

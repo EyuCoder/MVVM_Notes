@@ -1,6 +1,5 @@
 package com.codexo.notes.ui.notes
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,6 +15,7 @@ import com.codexo.notes.adapters.NotesAdapter
 import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.FragmentNotesBinding
 import com.codexo.notes.ui.SharedViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
@@ -67,30 +67,34 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_sort_by_title -> {
                 viewModel.sortBy(sortBy[0]).observe(this, { notesAdapter.setData(it) })
+                true
             }
             R.id.action_sort_by_date_created -> {
                 viewModel.sortBy("created_at").observe(this, { notesAdapter.setData(it) })
+                true
             }
             R.id.action_sort_by_date_modified -> {
                 viewModel.sortBy(sortBy[2]).observe(this, { notesAdapter.setData(it) })
+                true
             }
             R.id.action_about -> {
                 findNavController().navigate(R.id.action_notesFragment_to_aboutFragment)
+                true
             }
             R.id.action_delete_all_notes -> {
                 deleteAllDialog()
+                true
             }
-            else -> true
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun deleteAllDialog() {
         if (!viewModel.allNotes.value.isNullOrEmpty()) {
-            val builder = AlertDialog.Builder(requireContext())
+            val builder = MaterialAlertDialogBuilder(requireContext())
             builder.setPositiveButton("Yes") { _, _ ->
 
                 var notes: List<Note> = viewModel.allNotes.value!!

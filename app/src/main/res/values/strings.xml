@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name">Jotty</string>
     <string name="add_new_note">add new note</string>
     <string name="lorem_ipsum">What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="date_placeholder">Date: 02–08–2022</string>
@@ -22,7 +22,21 @@
         <item>Date created</item>
         <item>Date modified</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="hex_colors">
+        <item>#FFFFFF</item>
+        <item>#E3E3FF</item>
+        <item>#DFF2FD</item>
+        <item>#E2FCE6</item>
+        <item>#FCFADE</item>
+        <item>#FFEEE2</item>
+        <item>#FFDBDB</item>
+    </string-array>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_to_favorites">Add to favorites</string>
+    <string name="rate_this_app">Rate this app</string>
+    <string name="get_source_code">Get Source code</string>
+    <string name="Notes_desc">A simple and intuitive Notepad app for writing notes, memos, e-mails, messages, shopping lists and to-do lists.</string>
 </resources>

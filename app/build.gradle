@@ -37,6 +37,9 @@ android {
         viewBinding true
         dataBinding true
     }
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 dependencies {
@@ -58,7 +61,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
-
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
@@ -71,4 +73,10 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // Color picker
+    implementation 'com.github.naz013:ColorSlider:2.0.6'
+
+    // DataStore
+    implementation "androidx.datastore:datastore:1.0.0-rc02"
 }

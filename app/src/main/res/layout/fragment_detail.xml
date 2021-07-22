@@ -31,6 +31,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_add_title" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_14"
@@ -46,21 +47,35 @@
                 android:background="@drawable/custom_note_style" />
 
             <EditText
-                style="@style/NoteStyle"
-                android:layout_margin="0dp"
-                android:textSize="@dimen/large_regular_text"
                 android:id="@+id/et_add_note"
+                style="@style/NoteStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="0dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
+                android:maxLines="18"
                 android:gravity="start|top"
                 android:hint="@string/note"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
+                android:maxHeight="500dp"
                 android:paddingStart="@dimen/margin_14"
-                android:paddingEnd="@dimen/margin_14" />
+                android:paddingEnd="@dimen/margin_14"
+                android:textSize="@dimen/large_regular_text" />
+
         </LinearLayout>
+
+<!--        <com.github.naz013.colorslider.ColorSlider-->
+<!--            android:id="@+id/color_slider"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_margin="@dimen/margin_14"-->
+<!--            app:cs_hex_colors="@array/hex_colors"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/linearLayout"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/linearLayout"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
