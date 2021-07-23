@@ -104,7 +104,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             val builder = MaterialAlertDialogBuilder(requireContext())
             builder.setPositiveButton("Yes") { _, _ ->
 
-                var notes: List<Note> = viewModel.allNotes.value!!
+                val notes: List<Note> = viewModel.allNotes.value!!
                 viewModel.deleteAllNotes()
 
                 val snackBar = Snackbar.make(
@@ -114,6 +114,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                 snackBar.setAction("Undo") {
                     for (note in notes) {
                         sharedViewModel.insertNote(note)
+                        binding!!.animationView.isVisible = false
                     }
                 }
                 snackBar.show()
