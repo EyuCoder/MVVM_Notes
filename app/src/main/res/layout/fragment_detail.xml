@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -11,15 +12,16 @@
             android:id="@+id/et_add_title"
             style="@style/DetailStyle"
             android:hint="@string/title"
+            android:importantForAutofill="no"
             android:text=""
+            android:textColorHint="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            style="@style/DateTimeStyle"
             android:id="@+id/tv_note_date"
+            style="@style/DateTimeStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -48,33 +50,34 @@
 
             <EditText
                 android:id="@+id/et_add_note"
-                style="@style/NoteStyle"
+                style="@style/DetailStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:maxLines="18"
                 android:gravity="start|top"
                 android:hint="@string/note"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:maxHeight="500dp"
+                android:maxLines="18"
                 android:paddingStart="@dimen/margin_14"
                 android:paddingEnd="@dimen/margin_14"
+                android:textColorHint="@color/grey"
                 android:textSize="@dimen/large_regular_text" />
 
         </LinearLayout>
 
-<!--        <com.github.naz013.colorslider.ColorSlider-->
-<!--            android:id="@+id/color_slider"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_margin="@dimen/margin_14"-->
-<!--            app:cs_hex_colors="@array/hex_colors"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/linearLayout"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/linearLayout"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
+        <com.github.naz013.colorslider.ColorSlider
+            android:id="@+id/color_slider"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/margin_14"
+            app:cs_hex_colors="@array/hex_colors"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,13 +12,26 @@
         tools:layout="@layout/fragment_notes" >
         <action
             android:id="@+id/action_notesFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            app:destination="@id/addFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_notesFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            app:destination="@id/editFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_notesFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -27,6 +40,8 @@
         <action
             android:id="@+id/action_addFragment_to_notesFragment"
             app:destination="@id/notesFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
             app:popUpTo="@id/notesFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -37,6 +52,9 @@
         <action
             android:id="@+id/action_editFragment_to_notesFragment"
             app:destination="@id/notesFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             app:popUpTo="@id/notesFragment"
             app:popUpToInclusive="true" />
         <argument
@@ -47,9 +65,5 @@
         android:id="@+id/aboutFragment"
         android:name="com.codexo.notes.ui.AboutFragment"
         android:label="About Me"
-        tools:layout="@layout/fragment_about" >
-        <action
-            android:id="@+id/action_aboutFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_about" />
 </navigation>

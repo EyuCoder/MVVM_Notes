@@ -34,6 +34,11 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                 i.data = Uri.parse(playStoreUrl)
                 startActivity(i)
             }
+            btnFollow.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(instaUrl)
+                startActivity(i)
+            }
         }
         setHasOptionsMenu(true)
     }
@@ -41,5 +46,6 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
     companion object {
         const val gitUrl = "https://github.com/elysium09/MVVM_Notes"
         const val playStoreUrl = "https://play.google.com/store/apps/details?id=com.codexo.notes"
+        const val instaUrl = "https://instagram.com/_sczr"
     }
 }

@@ -24,8 +24,14 @@ interface NoteDao {
     @Query("DELETE FROM note_table")
     suspend fun clearNotes()
 
-    @Query("SELECT * FROM note_table ORDER BY :sortBy DESC")
-    fun sortBy(sortBy: String): LiveData<List<Note>>
+    @Query("SELECT * FROM note_table ORDER BY title DESC")
+    fun sortByTitle(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_table ORDER BY created_at DESC")
+    fun sortByDateCreated(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_table ORDER BY last_updated_at DESC")
+    fun sortByDateUpdated(): LiveData<List<Note>>
 
     @Query("SELECT * FROM note_table ORDER BY favorite DESC")
     fun sortByFavoriteDesc(): LiveData<List<Note>>

@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/TitleStyle"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_14"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/tv_ver_num"
-        style="@style/NoteStyle"
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_14"
@@ -40,8 +40,8 @@
         app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/textView2"
-        style="@style/NoteStyle"
+        android:id="@+id/tv_detail"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
@@ -61,7 +61,7 @@
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -80,7 +80,8 @@
 
             <TextView
                 android:id="@+id/github_tv"
-                style="@style/TitleStyle"
+                style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+                android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/get_source_code"
@@ -106,5 +107,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/git_card" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_follow"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_32"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_32"
+        android:text="@string/contact_me"
+        android:textColor="@color/purple_200"
+        app:cornerRadius="@dimen/margin_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_rate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

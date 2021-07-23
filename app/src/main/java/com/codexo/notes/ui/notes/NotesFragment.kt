@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -41,7 +42,12 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         }
 
         viewModel.allNotes.observe(viewLifecycleOwner) {
-            notesAdapter.setData(it)
+            if (!it.isNullOrEmpty()) {
+                notesAdapter.setData(it)
+            } else binding!!.apply {
+                animationView.isVisible = true
+                animationView.playAnimation()
+            }
         }
 
         setHasOptionsMenu(true)
@@ -67,17 +73,18 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return when (item.itemId) {
             R.id.action_sort_by_title -> {
-                viewModel.sortBy(sortBy[0]).observe(this, { notesAdapter.setData(it) })
+                viewModel.sortByTitle.observe(this, { notesAdapter.setData(it) })
                 true
             }
             R.id.action_sort_by_date_created -> {
-                viewModel.sortBy("created_at").observe(this, { notesAdapter.setData(it) })
+                viewModel.sortByDateCreated.observe(this, { notesAdapter.setData(it) })
                 true
             }
             R.id.action_sort_by_date_modified -> {
-                viewModel.sortBy(sortBy[2]).observe(this, { notesAdapter.setData(it) })
+                viewModel.sortByDateUpdated.observe(this, { notesAdapter.setData(it) })
                 true
             }
             R.id.action_about -> {

@@ -22,6 +22,8 @@ data class Note(
     var favorite: Boolean = false,
     @ColumnInfo(name = "last_updated_at")
     var lastUpdatedAt: Long = System.currentTimeMillis(),
+    @ColumnInfo(name = "bg_color")
+    val bgColor: Int,
     @ColumnInfo(name = "archived")
     val archived: Boolean = false,
 

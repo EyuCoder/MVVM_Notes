@@ -15,7 +15,9 @@ class NotesViewModel constructor(application: Application) : AndroidViewModel(ap
 
     val allNotes: LiveData<List<Note>> = noteDao.getNotes()
 
-    fun sortBy(sortBy: String): LiveData<List<Note>> = noteDao.sortBy(sortBy)
+    val sortByTitle: LiveData<List<Note>> = noteDao.sortByTitle()
+    val sortByDateCreated: LiveData<List<Note>> = noteDao.sortByDateCreated()
+    val sortByDateUpdated: LiveData<List<Note>> = noteDao.sortByDateUpdated()
 
     fun searchNote(searchQuery: String): LiveData<List<Note>> = noteDao.searchNote(searchQuery)
 
@@ -28,7 +30,8 @@ class NotesViewModel constructor(application: Application) : AndroidViewModel(ap
                 note = "this is A dummy note!",
                 favorite = true,
                 archived = false,
-                lastUpdatedAt = System.currentTimeMillis()
+                lastUpdatedAt = System.currentTimeMillis(),
+                bgColor = -1
             )
         )
     }

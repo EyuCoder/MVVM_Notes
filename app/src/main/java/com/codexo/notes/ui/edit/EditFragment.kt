@@ -35,6 +35,11 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
             etAddTitle.setText(args.currentItem.title)
             etAddNote.setText(args.currentItem.note)
             tvNoteDate.text = "last edited at: ${args.currentItem.lastUpdatedAtFormatted}"
+            colorSlider.selectColor(args.currentItem.bgColor)
+            background.setBackgroundColor(args.currentItem.bgColor)
+            colorSlider.setListener { _, color ->
+                background.setBackgroundColor(color)
+            }
         }
         setHasOptionsMenu(true)
     }
@@ -88,8 +93,9 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun updateNote() {
-        val title = binding?.etAddTitle?.text.toString()
-        val note = binding?.etAddNote?.text.toString()
+        val title = binding!!.etAddTitle.text.toString()
+        val note = binding!!.etAddNote.text.toString()
+        val color = binding!!.colorSlider.selectedColor
         if (title.isEmpty() && note.isEmpty()) {
             val snackbar = Snackbar.make(
                 requireView(),
@@ -99,11 +105,13 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
             snackbar.show()
         } else {
             val newNote = Note(
-                id = args.currentItem.id,
-                title = title,
-                note = note,
-                favorite = args.currentItem.favorite,
-                lastUpdatedAt = System.currentTimeMillis()
+                args.currentItem.id,
+                args.currentItem.createdAt,
+                title,
+                note,
+                args.currentItem.favorite,
+                System.currentTimeMillis(),
+                color
             )
             viewModel.updateNote(newNote)
             val snackbar = Snackbar.make(requireView(), "'$title' updated!", Snackbar.LENGTH_LONG)

@@ -37,9 +37,6 @@ android {
         viewBinding true
         dataBinding true
     }
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
 }
 
 dependencies {
@@ -78,5 +75,8 @@ dependencies {
     implementation 'com.github.naz013:ColorSlider:2.0.6'
 
     // DataStore
-    implementation "androidx.datastore:datastore:1.0.0-rc02"
+    implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
+
+    // Lottie Animation
+    implementation "com.airbnb.android:lottie:3.7.2"
 }

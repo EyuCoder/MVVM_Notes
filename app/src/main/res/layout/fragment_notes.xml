@@ -8,10 +8,21 @@
         android:layout_height="match_parent"
         tools:context=".ui.notes.NotesFragment">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:id="@+id/animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/ic_no_data" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_4"
             tools:listitem="@layout/item_notes" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

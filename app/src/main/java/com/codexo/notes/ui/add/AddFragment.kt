@@ -1,6 +1,7 @@
 package com.codexo.notes.ui.add
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -26,7 +27,13 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
 
-        binding!!.apply { tvNoteDate.isVisible = false}
+        binding!!.apply {
+            tvNoteDate.isVisible = false
+            background.setBackgroundColor(-1)
+            colorSlider.setListener { _, color ->
+                background.setBackgroundColor(color)
+            }
+        }
         setHasOptionsMenu(true)
     }
 
@@ -42,13 +49,15 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun addNewNote() {
-        val title = binding?.etAddTitle?.text.toString()
-        val note = binding?.etAddNote?.text.toString()
+        val title = binding!!.etAddTitle.text.toString()
+        val note = binding!!.etAddNote.text.toString()
+        val color = binding!!.colorSlider.selectedColor
+        Log.d("XO", "$color")
         if (title.isEmpty() && note.isEmpty()) {
             val snackbar = Snackbar.make(requireView(), "Please fill out one of the fields", Snackbar.LENGTH_LONG)
             snackbar.show()
         } else {
-            val newNote = Note(title = title, note = note)
+            val newNote = Note(title = title, note = note, bgColor = color)
             viewModel.insertNote(newNote)
             val snackbar = Snackbar.make(requireView(), "'$title' saved!", Snackbar.LENGTH_LONG)
             snackbar.show()

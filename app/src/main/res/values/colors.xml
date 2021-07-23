@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="grey">@android:color/darker_gray</color>
+    <color name="dark_grey">#2E2D2D</color>
     <color name="golden">#DAA520</color>
 </resources>
 <!--<color name="purple_500">#FF6200EE</color>-->
