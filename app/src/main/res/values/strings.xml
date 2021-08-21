@@ -40,4 +40,5 @@
     <string name="get_source_code">Get Source code</string>
     <string name="Notes_desc">A simple and intuitive Notepad app for writing notes, memos, e-mails, messages, shopping lists and to-do lists.</string>
     <string name="contact_me">contact me</string>
+    <string name="speech_to_text_button">speech to text button</string>
 </resources>

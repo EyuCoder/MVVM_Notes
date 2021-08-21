@@ -53,6 +53,7 @@
                 style="@style/DetailStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="40dp"
                 android:layout_margin="0dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
@@ -71,13 +72,26 @@
 
         <com.github.naz013.colorslider.ColorSlider
             android:id="@+id/color_slider"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
             android:layout_margin="@dimen/margin_14"
             app:cs_hex_colors="@array/hex_colors"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintEnd_toStartOf="@+id/fab_stt"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_stt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_14"
+            android:clickable="true"
+            android:contentDescription="@string/speech_to_text_button"
+            android:focusable="true"
+            app:fabSize="mini"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:srcCompat="@drawable/ic_voice" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

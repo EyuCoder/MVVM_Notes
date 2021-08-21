@@ -1,15 +1,19 @@
 package com.codexo.notes.ui.add
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.codexo.notes.R
 import com.codexo.notes.data.Note
@@ -17,7 +21,7 @@ import com.codexo.notes.databinding.FragmentDetailBinding
 import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_detail.view.*
+import java.util.*
 
 class AddFragment : Fragment(R.layout.fragment_detail) {
     private val viewModel: SharedViewModel by activityViewModels()
@@ -30,14 +34,41 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
         _binding = FragmentDetailBinding.bind(view)
 
         binding!!.apply {
-            etAddNote.setStylesBar(binding!!.stylesbar)
             tvNoteDate.isVisible = false
             background.setBackgroundColor(-1)
             colorSlider.setListener { _, color ->
                 background.setBackgroundColor(color)
             }
+            fabStt.setOnClickListener { openSTTActivity() }
         }
         setHasOptionsMenu(true)
+    }
+
+    private fun openSTTActivity() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+            .putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            .putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now!")
+
+        try {
+            resultLauncher.launch(intent)
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+            Snackbar.make(requireView(), "Your device does not support STT.", Snackbar.LENGTH_LONG)
+                .show()
+        }
+    }
+
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            data?.let {
+                binding!!.etAddNote.text = binding?.etAddNote?.text?.append(it[0])
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -57,7 +88,11 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
         val color = binding!!.colorSlider.selectedColor
         Log.d("XO", "$color")
         if (title.isEmpty() && note.isEmpty()) {
-            val snackbar = Snackbar.make(requireView(), "Please fill out one of the fields", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(
+                requireView(),
+                "Please fill out one of the fields",
+                Snackbar.LENGTH_LONG
+            )
             snackbar.show()
         } else {
             val newNote = Note(title = title, note = note, bgColor = color)

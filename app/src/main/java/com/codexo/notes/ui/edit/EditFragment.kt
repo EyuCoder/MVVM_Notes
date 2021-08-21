@@ -1,11 +1,16 @@
 package com.codexo.notes.ui.edit
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -18,6 +23,7 @@ import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 
 class EditFragment : Fragment(R.layout.fragment_detail) {
@@ -41,8 +47,36 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
             colorSlider.setListener { _, color ->
                 background.setBackgroundColor(color)
             }
+            fabStt.setOnClickListener { openSTTActivity() }
         }
         setHasOptionsMenu(true)
+    }
+
+    private fun openSTTActivity() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+            .putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            .putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now!")
+
+        try {
+            resultLauncher.launch(intent)
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+            Snackbar.make(requireView(), "Your device does not support STT.", Snackbar.LENGTH_LONG)
+                .show()
+        }
+    }
+
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            data?.let {
+                binding!!.etAddNote.text = binding?.etAddNote?.text?.append(it[0])
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
