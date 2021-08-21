@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.codexo.notes.R
@@ -16,9 +17,10 @@ import com.codexo.notes.databinding.FragmentDetailBinding
 import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_detail.view.*
 
 class AddFragment : Fragment(R.layout.fragment_detail) {
-    private val viewModel: SharedViewModel by viewModels()
+    private val viewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentDetailBinding? = null
     private val binding
         get() = _binding
@@ -28,6 +30,7 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
         _binding = FragmentDetailBinding.bind(view)
 
         binding!!.apply {
+            etAddNote.setStylesBar(binding!!.stylesbar)
             tvNoteDate.isVisible = false
             background.setBackgroundColor(-1)
             colorSlider.setListener { _, color ->
