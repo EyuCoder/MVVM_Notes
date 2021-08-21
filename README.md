@@ -5,12 +5,17 @@ A simple Notepad Android app ROOM, Navigation Component, MVVM, livedata, corouti
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="100"/></a>
 
 
-<!-- <p float="left">
-  <img src="download/welcome.png" width="200" />
-  <img src="download/catagory.png" width="200" /> 
-  <img src="download/modal.png" width="200" />
-  <img src="download/trivia.png" width="200" />
-</p> -->
+<p float="left">
+  <img src="screenshots/1.png" width="250" />
+  <img src="download/2.png" width="250" /> 
+  <img src="download/3.png" width="250" />
+</p>
+
+<p float="left">
+  <img src="screenshots/4.png" width="250" />
+  <img src="download/5.png" width="250" /> 
+  <img src="download/6.png" width="250" />
+</p>
 
 
 ## 📝 License
