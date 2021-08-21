@@ -13,4 +13,6 @@ A simple Notepad Android app ROOM, Navigation Component, MVVM, livedata, corouti
 </p> -->
 
 
-
+## 📝 License
+This project is released under the Apache 2.0 license.
+See [LICENSE](./LICENSE) for details.
