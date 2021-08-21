@@ -40,12 +40,16 @@
     <!--        android:title="@string/show_archived"-->
     <!--        app:showAsAction="never" />-->
     <item
-        android:id="@+id/action_about"
-        android:title="@string/about"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_delete_all_notes"
         android:title="@string/delete_all_notes"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about"
         app:showAsAction="never" />
 
 </menu>

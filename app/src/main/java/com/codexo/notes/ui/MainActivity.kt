@@ -1,5 +1,6 @@
 package com.codexo.notes.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -7,7 +8,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.preference.PreferenceManager
 import com.codexo.notes.R
+import com.codexo.notes.utils.ThemeUtil
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

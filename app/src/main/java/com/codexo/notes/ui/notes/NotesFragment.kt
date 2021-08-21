@@ -87,6 +87,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                 viewModel.sortByDateUpdated.observe(this, { notesAdapter.setData(it) })
                 true
             }
+            R.id.action_settings -> {
+                findNavController().navigate(R.id.action_notesFragment_to_settingsFragment)
+                true
+            }
             R.id.action_about -> {
                 findNavController().navigate(R.id.action_notesFragment_to_aboutFragment)
                 true
