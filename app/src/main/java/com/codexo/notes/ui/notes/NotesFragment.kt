@@ -19,18 +19,17 @@ import com.codexo.notes.ui.SharedViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-class NotesFragment : Fragment(R.layout.fragment_notes) {
+class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClickListener {
 
     private val viewModel: NotesViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by viewModels()
     private var _binding: FragmentNotesBinding? = null
     private val binding
         get() = _binding
-    private val notesAdapter = NotesAdapter()
+    private val notesAdapter = NotesAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         _binding = FragmentNotesBinding.bind(view)
 
         binding?.apply {
@@ -145,6 +144,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         })
     }
 
+    private fun markAsFavorite(markedFavorite: Boolean, id: Long) {
+        viewModel.markAsFavorite(markedFavorite, id)
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -157,5 +161,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     override fun onResume() {
         super.onResume()
         viewModel.allNotes.observe(viewLifecycleOwner) { notesAdapter.setData(it) }
+    }
+
+    override fun onFavoriteClicked(markedFavorite: Boolean, id: Long) {
+        markAsFavorite(markedFavorite, id)
     }
 }

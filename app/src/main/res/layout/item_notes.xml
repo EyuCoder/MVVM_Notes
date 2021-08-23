@@ -39,8 +39,9 @@
             <ImageView
                 android:id="@+id/iv_favorite"
                 style="@style/FavoriteStyle"
-                android:marked_favorite="@{Note.favorite}"
+                android:is_favorite="@{Note.favorite}"
                 android:src="@drawable/selector_favorite"
+                tools:src="@drawable/ic_favorite_on"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_title"

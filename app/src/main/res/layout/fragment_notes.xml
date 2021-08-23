@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:lottie_autoPlay="false"
-            app:lottie_loop="true"
+            app:lottie_loop="false"
             app:lottie_rawRes="@raw/ic_no_data" />
 
         <androidx.recyclerview.widget.RecyclerView

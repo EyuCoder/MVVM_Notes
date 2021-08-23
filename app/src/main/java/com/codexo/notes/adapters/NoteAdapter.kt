@@ -7,44 +7,46 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codexo.notes.data.Note
 import com.codexo.notes.databinding.ItemNotesBinding
 
-class NotesAdapter : RecyclerView.Adapter<NotesAdapter.TodoViewHolder>() {
+class NotesAdapter(private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
-    var todoList = emptyList<Note>()
+    var NoteList = emptyList<Note>()
 
-    class TodoViewHolder(private val binding: ItemNotesBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(note: Note) {
-            binding.note = note
-            binding.executePendingBindings()
-        }
-
-        companion object {
-            fun from(parent: ViewGroup): TodoViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemNotesBinding.inflate(layoutInflater, parent, false)
-                return TodoViewHolder(binding)
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+        val binding = ItemNotesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return NoteViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        return TodoViewHolder.from(parent)
-    }
-
-    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val currentItem = todoList[position]
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        val currentItem = NoteList[position]
         holder.bind(currentItem)
     }
 
     override fun getItemCount(): Int {
-        return todoList.size
+        return NoteList.size
     }
 
     fun setData(notesData: List<Note>) {
-        val notesDiffUtil = DiffUtil(todoList, notesData)
+        val notesDiffUtil = DiffUtil(NoteList, notesData)
         val notesDiffResult = DiffUtil.calculateDiff(notesDiffUtil)
 
-        this.todoList = notesData
+        this.NoteList = notesData
         notesDiffResult.dispatchUpdatesTo(this)
+    }
+
+    inner class NoteViewHolder(private val binding: ItemNotesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(note: Note) {
+            binding.note = note
+            binding.ivFavorite.setOnClickListener {
+                listener.onFavoriteClicked(!note.favorite, note.id)
+            }
+
+            binding.executePendingBindings()
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onFavoriteClicked(markedFavorite: Boolean, id: Long)
     }
 }

@@ -29,9 +29,9 @@ class BindingAdapter {
             view.visibility = if (emptyDb.value == true) View.VISIBLE else View.INVISIBLE
         }
 
-        @BindingAdapter("android:marked_favorite")
+        @BindingAdapter("android:is_favorite")
         @JvmStatic
-        fun markFavorite(img: ImageView, marked: Boolean) {
+        fun isFavorite(img: ImageView, marked: Boolean) {
             if (marked) {
                 img.setImageResource(R.drawable.ic_favorite_on)
             } else img.setImageResource(R.drawable.ic_favorite_off)

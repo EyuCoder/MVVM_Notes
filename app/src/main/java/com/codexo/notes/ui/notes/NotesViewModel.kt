@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.codexo.notes.data.Note
 import com.codexo.notes.data.NoteDatabase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NotesViewModel constructor(application: Application) : AndroidViewModel(application) {
@@ -22,6 +23,9 @@ class NotesViewModel constructor(application: Application) : AndroidViewModel(ap
     fun searchNote(searchQuery: String): LiveData<List<Note>> = noteDao.searchNote(searchQuery)
 
     fun deleteAllNotes() = viewModelScope.launch { noteDao.clearNotes() }
+
+    fun markAsFavorite(fave: Boolean, id: Long) =
+        viewModelScope.launch(Dispatchers.IO) { noteDao.markAsFavorite(fave, id) }
 
     fun initDummyNote() = viewModelScope.launch {
         noteDao.insert(
