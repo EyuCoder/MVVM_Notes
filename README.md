@@ -14,6 +14,14 @@ A simple Notepad Android app ROOM, Navigation Component, MVVM, livedata, corouti
   <img src="screenshots/6.png" width="170" />
 </p>
 
+## Contributors are Welcome!❤️
+if you'd like to help contribute to this project:
+- fork this repo
+- clone your forked repo to your local machine
+- check the application and if you find bugs or would like to add some features, head over to issues tab and check if its already listed or not. then create a new issue there. 
+- comment on issues you'd like to work on or send me a DM here [Eyuel](https://linkedin.com/in/eyuel-daniel)
+- work on your assigned issue and push to a new branch then create a pull request
+
 
 ## 📝 License
 This project is released under the Apache 2.0 license.
