@@ -2,12 +2,48 @@ package com.codexo.notes.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.codexo.notes.utils.SortBy
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-    @Query("SELECT * FROM note_table ORDER BY id DESC")
-    fun getNotes(): LiveData<List<Note>>
+
+    fun getNotes(sortBy: String): LiveData<List<Note>> {
+        return when (sortBy) {
+            SortBy.TITLE.colName -> notesSortByTitle()
+            SortBy.CREATED_AT.colName -> notesSortByCreatedAt()
+            else -> notesSortByLastUpdated()
+        }
+    }
+
+    fun getNotesFavePinned(sortBy: String): LiveData<List<Note>> {
+        return when (sortBy) {
+            SortBy.TITLE.colName -> notesSortByTitleFavePinned()
+            SortBy.CREATED_AT.colName -> notesSortByCreatedAtFavePinned()
+            else -> notesSortByLastUpdatedFavePinned()
+        }
+    }
+
+
+    @Query("SELECT * FROM note_table ORDER BY title ASC")
+    fun notesSortByTitle(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_table ORDER BY last_updated_at DESC")
+    fun notesSortByLastUpdated(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_table ORDER BY created_at ASC")
+    fun notesSortByCreatedAt(): LiveData<List<Note>>
+
+
+    @Query("SELECT * FROM note_table ORDER BY favorite DESC, title ASC")
+    fun notesSortByTitleFavePinned(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_table ORDER BY favorite DESC, last_updated_at DESC")
+    fun notesSortByLastUpdatedFavePinned(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note_table ORDER BY favorite DESC, created_at ASC")
+    fun notesSortByCreatedAtFavePinned(): LiveData<List<Note>>
+
 
     @Query("SELECT * FROM note_table WHERE title LIKE '%' || :searchQuery || '%' ORDER BY id DESC")
     fun searchNote(searchQuery: String): LiveData<List<Note>>
@@ -23,18 +59,6 @@ interface NoteDao {
 
     @Query("DELETE FROM note_table")
     suspend fun clearNotes()
-
-    @Query("SELECT * FROM note_table ORDER BY title DESC")
-    fun sortByTitle(): LiveData<List<Note>>
-
-    @Query("SELECT * FROM note_table ORDER BY created_at DESC")
-    fun sortByDateCreated(): LiveData<List<Note>>
-
-    @Query("SELECT * FROM note_table ORDER BY last_updated_at DESC")
-    fun sortByDateUpdated(): LiveData<List<Note>>
-
-    @Query("SELECT * FROM note_table ORDER BY favorite DESC")
-    fun sortByFavoriteDesc(): LiveData<List<Note>>
 
     @Query("UPDATE note_table SET favorite = :fave WHERE id = :id")
     suspend fun markAsFavorite(fave: Boolean, id: Long)

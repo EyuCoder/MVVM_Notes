@@ -10,12 +10,20 @@
         app:showAsAction="always|collapseActionView" />
 
     <group android:checkableBehavior="single">
+
         <item
             android:icon="@drawable/ic_sort"
             android:title="@string/sort"
             app:showAsAction="ifRoom">
-
             <menu>
+                <group>
+                    <item
+                        android:id="@+id/action_pin_favorites"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:title="@string/pin_favorites"
+                        app:showAsAction="never" />
+                </group>
                 <item
                     android:id="@+id/action_sort_by_title"
                     android:title="@string/title" />
@@ -26,14 +34,10 @@
                     android:id="@+id/action_sort_by_date_modified"
                     android:title="@string/date_modified" />
             </menu>
+
         </item>
     </group>
 
-    <!--    <item-->
-    <!--        android:id="@+id/action_pin_favorites"-->
-    <!--        android:checkable="true"-->
-    <!--        android:title="@string/pin_favorites"-->
-    <!--        app:showAsAction="never" />-->
     <!--    <item-->
     <!--        android:id="@+id/action_show_archived"-->
     <!--        android:checkable="true"-->

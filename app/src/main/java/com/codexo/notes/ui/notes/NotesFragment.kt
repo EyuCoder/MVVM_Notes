@@ -1,6 +1,7 @@
 package com.codexo.notes.ui.notes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -14,23 +15,29 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codexo.notes.R
 import com.codexo.notes.adapters.NotesAdapter
 import com.codexo.notes.data.Note
+import com.codexo.notes.data.PreferenceManager
 import com.codexo.notes.databinding.FragmentNotesBinding
 import com.codexo.notes.ui.SharedViewModel
+import com.codexo.notes.utils.SortBy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClickListener {
 
+    private val TAG = NotesFragment::class.java.simpleName
     private val viewModel: NotesViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by viewModels()
     private var _binding: FragmentNotesBinding? = null
     private val binding
         get() = _binding
     private val notesAdapter = NotesAdapter(this)
+    private val prefs: PreferenceManager by lazy { PreferenceManager(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNotesBinding.bind(view)
+
+        Log.d(TAG, "onViewCreated:${SortBy.CREATED_AT.colName}")
 
         binding?.apply {
             rvNotes.apply {
@@ -58,6 +65,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
+        val pinFavoriteMenu = menu.findItem(R.id.action_pin_favorites)
+        pinFavoriteMenu.isChecked = prefs.favoritePinnedStatus()
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -74,16 +84,25 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId) {
+            R.id.action_pin_favorites -> {
+                prefs.favoritePinned(!prefs.favoritePinnedStatus())
+                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
+                item.isChecked = prefs.favoritePinnedStatus()
+                true
+            }
             R.id.action_sort_by_title -> {
-                viewModel.sortByTitle.observe(this, { notesAdapter.setData(it) })
+                prefs.setSortBy(SortBy.TITLE.colName)
+                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
                 true
             }
             R.id.action_sort_by_date_created -> {
-                viewModel.sortByDateCreated.observe(this, { notesAdapter.setData(it) })
+                prefs.setSortBy(SortBy.CREATED_AT.colName)
+                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
                 true
             }
             R.id.action_sort_by_date_modified -> {
-                viewModel.sortByDateUpdated.observe(this, { notesAdapter.setData(it) })
+                prefs.setSortBy(SortBy.LAST_UPDATED_AT.colName)
+                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
                 true
             }
             R.id.action_settings -> {
