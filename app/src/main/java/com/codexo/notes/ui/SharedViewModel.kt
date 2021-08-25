@@ -18,5 +18,11 @@ class SharedViewModel constructor(application: Application) : AndroidViewModel(a
     fun deleteItem(note: Note) = viewModelScope.launch(Dispatchers.IO) { noteDao.delete(note) }
 
     fun markAsFavorite(fave: Boolean, id: Long) =
-        viewModelScope.launch(Dispatchers.IO) { noteDao.markAsFavorite(fave, id) }
+        viewModelScope.launch(Dispatchers.IO) {
+            noteDao.markAsFavorite(
+                fave,
+                System.currentTimeMillis(),
+                id
+            )
+        }
 }

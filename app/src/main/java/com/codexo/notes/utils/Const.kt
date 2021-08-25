@@ -1,7 +1,7 @@
 package com.codexo.notes.utils
 
-const val REQUEST_CODE_STT = 1
 const val THEME_PREF_KEY = "themePref"
+const val VIEW_PREF_KEY = "viewPref"
 
 enum class SortBy(val colName: String) {
     ID("id"),

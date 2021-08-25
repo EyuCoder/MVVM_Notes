@@ -9,11 +9,11 @@
         tools:context=".ui.notes.NotesFragment">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:visibility="gone"
-            android:layout_gravity="center"
             android:id="@+id/animation_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
             app:lottie_autoPlay="false"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/ic_no_data" />
@@ -24,6 +24,17 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_4"
             tools:listitem="@layout/item_notes" />
+
+        <TextView
+            android:id="@+id/tv_no_note"
+            android:layout_marginTop="@dimen/margin_32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/no_notes"
+            android:textSize="18sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
@@ -37,5 +48,6 @@
             android:focusable="true"
             android:nav_to_add="@{true}"
             app:srcCompat="@drawable/ic_add" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

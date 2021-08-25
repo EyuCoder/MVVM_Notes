@@ -158,14 +158,16 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
         val searchQuery = "%${query}%"
         viewModel.searchNote(searchQuery).observe(this, { list ->
             list?.let {
-                notesAdapter.setData(it)
+                if (it.isNullOrEmpty()) {
+                    binding!!.rvNotes.visibility = View.GONE
+                    binding!!.tvNoNote.visibility = View.VISIBLE
+                } else {
+                    binding!!.tvNoNote.visibility = View.GONE
+                    binding!!.rvNotes.visibility = View.VISIBLE
+                    notesAdapter.setData(it)
+                }
             }
         })
-    }
-
-    private fun markAsFavorite(markedFavorite: Boolean, id: Long) {
-        viewModel.markAsFavorite(markedFavorite, id)
-
     }
 
     override fun onDestroyView() {
@@ -183,6 +185,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
     }
 
     override fun onFavoriteClicked(markedFavorite: Boolean, id: Long) {
-        markAsFavorite(markedFavorite, id)
+        sharedViewModel.markAsFavorite(markedFavorite, id)
     }
 }

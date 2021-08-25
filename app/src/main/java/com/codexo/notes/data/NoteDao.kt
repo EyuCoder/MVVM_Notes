@@ -60,7 +60,7 @@ interface NoteDao {
     @Query("DELETE FROM note_table")
     suspend fun clearNotes()
 
-    @Query("UPDATE note_table SET favorite = :fave WHERE id = :id")
-    suspend fun markAsFavorite(fave: Boolean, id: Long)
+    @Query("UPDATE note_table SET favorite = :fave, last_updated_at = :time WHERE id = :id")
+    suspend fun markAsFavorite(fave: Boolean, time: Long, id: Long)
 
 }
