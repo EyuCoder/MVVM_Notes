@@ -22,7 +22,7 @@
             android:id="@+id/rv_notes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_4"
+            android:layout_margin="@dimen/margin_4"
             tools:listitem="@layout/item_notes" />
 
         <TextView

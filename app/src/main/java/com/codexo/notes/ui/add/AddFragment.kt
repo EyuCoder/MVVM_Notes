@@ -76,8 +76,9 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_save) {
-            addNewNote()
+        when (item.itemId) {
+            R.id.menu_save -> addNewNote()
+            android.R.id.home -> hideKeyboard()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -90,7 +91,7 @@ class AddFragment : Fragment(R.layout.fragment_detail) {
         if (title.isEmpty() && note.isEmpty()) {
             val snackbar = Snackbar.make(
                 requireView(),
-                "Please fill out one of the fields",
+                "Please fill out title or description of the note",
                 Snackbar.LENGTH_LONG
             )
             snackbar.show()

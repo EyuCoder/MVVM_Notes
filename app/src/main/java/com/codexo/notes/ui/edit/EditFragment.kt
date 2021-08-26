@@ -70,14 +70,15 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            data?.let {
-                binding!!.etAddNote.text = binding?.etAddNote?.text?.append(it[0])
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                data?.let {
+                    binding!!.etAddNote.text = binding?.etAddNote?.text?.append(it[0])
+                }
             }
         }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_fragment_edit, menu)
@@ -86,6 +87,9 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
             item.title = "Remove from favorites"
         } else {
             item.title = "Add to favorites"
+        }
+        when (item.itemId) {
+            android.R.id.home -> hideKeyboard()
         }
     }
 
@@ -134,7 +138,7 @@ class EditFragment : Fragment(R.layout.fragment_detail) {
         if (title.isEmpty() && note.isEmpty()) {
             val snackbar = Snackbar.make(
                 requireView(),
-                "Please fill out one of the fields.",
+                "Please fill out title or description of the note.",
                 Snackbar.LENGTH_LONG
             )
             snackbar.show()
