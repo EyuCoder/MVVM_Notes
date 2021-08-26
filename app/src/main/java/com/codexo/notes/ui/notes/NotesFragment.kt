@@ -122,11 +122,12 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
     }
 
     private fun deleteAllDialog() {
-        if (!viewModel.allNotes.value.isNullOrEmpty()) {
+
+        if (!notesAdapter.NoteList.isNullOrEmpty()) {
             val builder = MaterialAlertDialogBuilder(requireContext())
             builder.setPositiveButton("Yes") { _, _ ->
 
-                val notes: List<Note> = viewModel.allNotes.value!!
+                val notes: List<Note> = notesAdapter.NoteList
                 viewModel.deleteAllNotes()
 
                 val snackBar = Snackbar.make(
