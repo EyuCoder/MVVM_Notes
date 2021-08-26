@@ -14,4 +14,19 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="view_category"
+        app:title="View">
+
+        <ListPreference
+            app:key="viewPref"
+            app:title="Layout Style"
+            app:defaultValue="grid"
+            app:dialogTitle="Select layout style"
+            app:entries="@array/viewListArray"
+            app:entryValues="@array/viewEntryArray"
+            app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -1,4 +1,5 @@
 <resources>
+    <!-- Application Theme -->
     <string-array name="themeListArray">
         <item>Light</item>
         <item>Dark</item>
@@ -9,5 +10,16 @@
         <item>light</item>
         <item>dark</item>
         <item>default</item>
+    </string-array>
+
+    <!-- Recyclerview Layout Style -->
+    <string-array name="viewListArray">
+        <item>List</item>
+        <item>Grid</item>
+    </string-array>
+
+    <string-array name="viewEntryArray">
+        <item>list</item>
+        <item>grid</item>
     </string-array>
 </resources>

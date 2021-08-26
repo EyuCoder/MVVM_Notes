@@ -1,9 +1,11 @@
 package com.codexo.notes.data
 
 import android.content.Context
+import androidx.preference.PreferenceManager
 import com.codexo.notes.utils.SortBy
+import com.codexo.notes.utils.VIEW_PREF_KEY
 
-class PreferenceManager(private val context: Context) {
+class PrefsManager(private val context: Context) {
 
     companion object {
         private const val PREFS_NAME = "JottyNotes"
@@ -37,5 +39,13 @@ class PreferenceManager(private val context: Context) {
             return preferences.getBoolean(FAVORITE_PINNED, false)
         }
         return false
+    }
+
+    fun getViewStyle(): String? {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        if (prefs.contains(VIEW_PREF_KEY)) {
+            return prefs.getString(VIEW_PREF_KEY, "grid")
+        }
+        return null
     }
 }

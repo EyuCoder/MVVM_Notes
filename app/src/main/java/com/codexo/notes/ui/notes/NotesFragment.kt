@@ -6,21 +6,24 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codexo.notes.R
 import com.codexo.notes.adapters.NotesAdapter
 import com.codexo.notes.data.Note
-import com.codexo.notes.data.PreferenceManager
+import com.codexo.notes.data.PrefsManager
 import com.codexo.notes.databinding.FragmentNotesBinding
 import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.SortBy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClickListener {
 
@@ -31,18 +34,16 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
     private val binding
         get() = _binding
     private val notesAdapter = NotesAdapter(this)
-    private val prefs: PreferenceManager by lazy { PreferenceManager(requireContext()) }
+    private val prefs: PrefsManager by lazy { PrefsManager(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNotesBinding.bind(view)
 
-        Log.d(TAG, "onViewCreated:${SortBy.CREATED_AT.colName}")
-
         binding?.apply {
             rvNotes.apply {
                 adapter = notesAdapter
-                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                layoutStyle()
                 setHasFixedSize(true)
             }
         }
@@ -55,6 +56,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
                 animationView.playAnimation()
             }
         }
+        Log.d(TAG, "onViewCreated:${prefs.getViewStyle()}")
 
         setHasOptionsMenu(true)
     }
@@ -67,6 +69,12 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
 
         val pinFavoriteMenu = menu.findItem(R.id.action_pin_favorites)
         pinFavoriteMenu.isChecked = prefs.favoritePinnedStatus()
+
+        when (prefs.sortBy()) {
+            SortBy.TITLE.colName -> updateMenu(menu.findItem(R.id.action_sort_by_title))
+            SortBy.CREATED_AT.colName -> updateMenu(menu.findItem(R.id.action_sort_by_date_created))
+            SortBy.LAST_UPDATED_AT.colName -> updateMenu(menu.findItem(R.id.action_sort_by_date_modified))
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -92,17 +100,17 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
             }
             R.id.action_sort_by_title -> {
                 prefs.setSortBy(SortBy.TITLE.colName)
-                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
+                updateMenu(item)
                 true
             }
             R.id.action_sort_by_date_created -> {
                 prefs.setSortBy(SortBy.CREATED_AT.colName)
-                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
+                updateMenu(item)
                 true
             }
             R.id.action_sort_by_date_modified -> {
                 prefs.setSortBy(SortBy.LAST_UPDATED_AT.colName)
-                viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
+                updateMenu(item)
                 true
             }
             R.id.action_settings -> {
@@ -119,6 +127,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun updateMenu(item: MenuItem) {
+        viewModel.allNotes.observe(this, { notesAdapter.setData(it) })
+        item.isChecked = true
     }
 
     private fun deleteAllDialog() {
@@ -176,13 +189,19 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
         _binding = null
     }
 
-    companion object {
-        val sortBy = listOf("title", "created_at", "last_updated_at", "favorite")
-    }
-
     override fun onResume() {
         super.onResume()
         viewModel.allNotes.observe(viewLifecycleOwner) { notesAdapter.setData(it) }
+    }
+
+    private fun layoutStyle() {
+        if (prefs.getViewStyle().equals("list")) {
+            binding!!.rvNotes.layoutManager =
+                LinearLayoutManager(context)
+        } else {
+            binding!!.rvNotes.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        }
     }
 
     override fun onFavoriteClicked(markedFavorite: Boolean, id: Long) {

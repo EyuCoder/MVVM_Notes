@@ -7,8 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.codexo.notes.data.Note
 import com.codexo.notes.data.NoteDatabase
-import com.codexo.notes.data.PreferenceManager
-import kotlinx.coroutines.Dispatchers
+import com.codexo.notes.data.PrefsManager
 import kotlinx.coroutines.launch
 
 class NotesViewModel constructor(application: Application) : AndroidViewModel(application) {
@@ -17,7 +16,7 @@ class NotesViewModel constructor(application: Application) : AndroidViewModel(ap
 
     lateinit var searchQuery: String
 
-    private val prefs = PreferenceManager(application)
+    private val prefs = PrefsManager(application)
 
     val allNotes: LiveData<List<Note>>
         get() = getNotes()
