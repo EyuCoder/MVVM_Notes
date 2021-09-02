@@ -1,15 +1,17 @@
 package com.codexo.notes.ui
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codexo.notes.data.Note
-import com.codexo.notes.data.NoteDatabase
+import com.codexo.notes.data.NoteDao
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SharedViewModel constructor(application: Application) : AndroidViewModel(application) {
-    private val noteDao = NoteDatabase.getInstance(application).noteDao()
+@HiltViewModel
+class SharedViewModel @Inject constructor(private val noteDao: NoteDao) : ViewModel() {
 
     fun insertNote(note: Note) = viewModelScope.launch(Dispatchers.IO) { noteDao.insert(note) }
 

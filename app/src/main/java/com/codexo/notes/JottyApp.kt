@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.codexo.notes.utils.THEME_PREF_KEY
 import com.codexo.notes.utils.ThemeUtil
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class JottyApp : Application() {
 
     override fun onCreate() {
