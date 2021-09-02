@@ -15,16 +15,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-  @Singleton
-  @Provides
-  fun provideDatabase(@ApplicationContext applicationContext: Context): NoteDatabase {
-    return Room.databaseBuilder(
-      applicationContext,
-      NoteDatabase::class.java,
-      "notes_db"
-    ).fallbackToDestructiveMigration().build()
-  }
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext applicationContext: Context): NoteDatabase {
+        return Room.databaseBuilder(
+                applicationContext,
+                NoteDatabase::class.java,
+                "notes_db"
+        ).fallbackToDestructiveMigration().build()
+    }
 
-  @Provides
-  fun provideNoteDao(noteDatabase: NoteDatabase): NoteDao = noteDatabase.noteDao()
+    @Provides
+    fun provideNoteDao(noteDatabase: NoteDatabase): NoteDao = noteDatabase.noteDao()
 }
