@@ -1,4 +1,4 @@
-# MVVM_Notes (Jotty : Take notes on the go)
+# MVVM_Notes (Jotty : Take notes with your voice)
 A simple Notepad Android app ROOM, Navigation Component, MVVM, livedata, coroutines, safeargs ...
 
 <a href="https://play.google.com/store/apps/details?id=com.codexo.notes" target="_blank">
