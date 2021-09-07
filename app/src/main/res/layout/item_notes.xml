@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="favorite"
-            type="com.codexo.notes.ui.notes.NotesFragment" />
-
-        <variable
             name="Note"
             type="com.codexo.notes.data.Note" />
     </data>

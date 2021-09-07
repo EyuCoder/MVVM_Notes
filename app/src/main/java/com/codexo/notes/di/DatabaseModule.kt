@@ -1,4 +1,4 @@
-package com.codexo.notes.core
+package com.codexo.notes.di
 
 import android.content.Context
 import androidx.room.Room
