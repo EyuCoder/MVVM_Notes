@@ -12,7 +12,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,12 +22,13 @@ import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.HideKeyboard.Companion.hideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class EditFragment : Fragment(R.layout.fragment_detail) {
     private val args: EditFragmentArgs by navArgs()
-    private val viewModel: SharedViewModel by activityViewModels()
+    private val viewModel: SharedViewModel by viewModels()
     private var _binding: FragmentDetailBinding? = null
     private val binding
         get() = _binding

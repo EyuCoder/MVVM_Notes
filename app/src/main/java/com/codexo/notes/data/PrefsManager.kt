@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.codexo.notes.utils.SortBy
 import com.codexo.notes.utils.VIEW_PREF_KEY
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class PrefsManager(private val context: Context) {
+class PrefsManager @Inject constructor(@ApplicationContext private val context: Context) {
 
     companion object {
         private const val PREFS_NAME = "JottyNotes"

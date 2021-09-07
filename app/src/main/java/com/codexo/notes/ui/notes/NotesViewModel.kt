@@ -1,22 +1,25 @@
 package com.codexo.notes.ui.notes
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codexo.notes.data.Note
-import com.codexo.notes.data.NoteDatabase
+import com.codexo.notes.data.NoteDao
 import com.codexo.notes.data.PrefsManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NotesViewModel constructor(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class NotesViewModel @Inject constructor(
+    private val prefs: PrefsManager,
+    private val noteDao: NoteDao
+) : ViewModel() {
+
     private val TAG = NotesViewModel::class.java.simpleName
-    private val noteDao = NoteDatabase.getInstance(application).noteDao()
 
     lateinit var searchQuery: String
-
-    private val prefs = PrefsManager(application)
 
     val allNotes: LiveData<List<Note>>
         get() = getNotes()

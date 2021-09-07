@@ -23,8 +23,11 @@ import com.codexo.notes.ui.SharedViewModel
 import com.codexo.notes.utils.SortBy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_notes.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClickListener {
 
     private val TAG = NotesFragment::class.java.simpleName
@@ -34,7 +37,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NotesAdapter.OnItemClic
     private val binding
         get() = _binding
     private val notesAdapter = NotesAdapter(this)
-    private val prefs: PrefsManager by lazy { PrefsManager(requireContext()) }
+    @Inject lateinit var prefs: PrefsManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

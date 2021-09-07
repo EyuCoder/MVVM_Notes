@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -80,4 +81,12 @@ dependencies {
 
     //Kotlin SharedPreference
     implementation 'androidx.preference:preference-ktx:1.1.1'
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+}
+
+kapt {
+    correctErrorTypes true
 }
